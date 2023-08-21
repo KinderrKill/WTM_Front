@@ -35,6 +35,9 @@ export default function App() {
         <span className='text-[6rem] tracking-wide bg-transparent'>WHAT THE</span>
         <span className='text-[10rem] font-bold -mt-20 bg-transparent'>MEME</span>
         <span className='text-4xl text-red-600'>LE JEU N'EST PAS ENCORE FONCTIONEL !</span>
+        <span>
+          Server adress is {import.meta.env.VITE_APP_DEV_SOCKET_ENDPOINT} | {import.meta.env.API_URL}
+        </span>
       </article>
 
       {displayJoinPanel ? (
@@ -119,7 +122,11 @@ function handleClickJoinGame(username: string | undefined, id: string | undefine
 }
 
 function handleClickCreateGame(username: string | undefined) {
+  console.log('HandleClickCreateGame');
+
   if (username === undefined) return;
+
+  console.log('SocketEmit', socket);
 
   socket.emit('create_game', { player: { username }, cookie: document.cookie });
 }
